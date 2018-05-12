@@ -19,7 +19,6 @@ class HttpCall {
     }
 
     getFolders(pathToGet) {
-        debugger
         return new Promise((resolve, reject) => {
             try {
                 let path = pathToGet.split('/').filter(p => (p !== '' && p !== '.'));

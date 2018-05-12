@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import SideBar from './atoms/Sidebar';
 import * as folderActions from './actions/FolderActions'
+import * as generalActions from './actions/GeneralActions'
 import FilesContainer from './atoms/FilesContainer';
 import './App.css';
 
@@ -22,6 +23,12 @@ export class App extends Component {
     let newPath = `${this.props.path}/${name}`;
     newPath.replace('//', '/');
     this.props.folderActions.updateFolders(`${this.props.path}${name}`);
+  }
+
+  goUpFolder(){
+    if(this.props.path === './'){
+      this.props.generalActions.error('Already at the topmost folder')
+    }
   }
 
   render() {
@@ -50,7 +57,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => {
-  return { folderActions: bindActionCreators(folderActions, dispatch) }
+  return { folderActions: bindActionCreators(folderActions, dispatch),
+    generalActions: bindActionCreators(generalActions, dispatch) }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
