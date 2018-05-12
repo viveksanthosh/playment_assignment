@@ -11,22 +11,25 @@ export class App extends Component {
   constructor(props) {
     super(props);
     this.addFolder = this.addFolder.bind(this);
+    this.goUpFolder = this.goUpFolder.bind(this);
     this.onFolderClick = this.onFolderClick.bind(this);
   }
 
-  addFolder(){
+  addFolder() {
     let name = prompt("Folder Name");
-    this.props.folderActions.addFolder(name, this.props.path);
+    if (name) {
+      this.props.folderActions.addFolder(name, this.props.path);
+    }
   }
 
-  onFolderClick(name){
+  onFolderClick(name) {
     let newPath = `${this.props.path}/${name}`;
     newPath.replace('//', '/');
     this.props.folderActions.updateFolders(`${this.props.path}${name}`);
   }
 
-  goUpFolder(){
-    if(this.props.path === './'){
+  goUpFolder() {
+    if (this.props.path === './') {
       this.props.generalActions.error('Already at the topmost folder')
     }
   }
@@ -38,13 +41,13 @@ export class App extends Component {
         <div className="main">
           <div className="controlButtons">
             <p><b>Files</b></p>
-            <button onClick = {this.addFolder} className="btn btn-primary">Add</button>
-            <button className="btn btn-primary">Up</button>
+            <button onClick={this.addFolder} className="btn btn-primary">Add</button>
+            <button onClick={this.goUpFolder} className="btn btn-primary">Up</button>
           </div>
           <div className="pathContainer">
             <p>{this.props.path}</p>
           </div>
-          <FilesContainer onFolderClick = {this.onFolderClick} files={this.props.folders} />
+          <FilesContainer onFolderClick={this.onFolderClick} files={this.props.folders} />
         </div>
       </Fragment>
     );
@@ -57,8 +60,10 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => {
-  return { folderActions: bindActionCreators(folderActions, dispatch),
-    generalActions: bindActionCreators(generalActions, dispatch) }
+  return {
+    folderActions: bindActionCreators(folderActions, dispatch),
+    generalActions: bindActionCreators(generalActions, dispatch)
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
