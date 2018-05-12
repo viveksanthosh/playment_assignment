@@ -10,11 +10,18 @@ export class App extends Component {
   constructor(props) {
     super(props);
     this.addFolder = this.addFolder.bind(this);
+    this.onFolderClick = this.onFolderClick.bind(this);
   }
 
   addFolder(){
     let name = prompt("Folder Name");
     this.props.folderActions.addFolder(name, this.props.path);
+  }
+
+  onFolderClick(name){
+    let newPath = `${this.props.path}/${name}`;
+    newPath.replace('//', '/');
+    this.props.folderActions.updateFolders(`${this.props.path}${name}`);
   }
 
   render() {
@@ -30,7 +37,7 @@ export class App extends Component {
           <div className="pathContainer">
             <p>{this.props.path}</p>
           </div>
-          <FilesContainer files={this.props.folders} />
+          <FilesContainer onFolderClick = {this.onFolderClick} files={this.props.folders} />
         </div>
       </Fragment>
     );
