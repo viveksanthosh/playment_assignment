@@ -20,7 +20,7 @@ export class App extends Component {
           <div className="pathContainer">
             <p>{this.props.path}</p>
           </div>
-          <FilesContainer files={this.props.folders} />
+          <FilesContainer files={["1", "2", "34"]} />
         </div>
       </Fragment>
     );
