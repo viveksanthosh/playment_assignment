@@ -7,6 +7,16 @@ import FilesContainer from './atoms/FilesContainer';
 import './App.css';
 
 export class App extends Component {
+  constructor(props) {
+    super(props);
+    this.addFolder = this.addFolder.bind(this);
+  }
+
+  addFolder(){
+    let name = prompt("Folder Name");
+    this.props.folderActions.addFolder(name, this.props.path);
+  }
+
   render() {
     return (
       <Fragment>
@@ -14,13 +24,13 @@ export class App extends Component {
         <div className="main">
           <div className="controlButtons">
             <p><b>Files</b></p>
-            <button className="btn btn-primary">Add</button>
+            <button onClick = {this.addFolder} className="btn btn-primary">Add</button>
             <button className="btn btn-primary">Up</button>
           </div>
           <div className="pathContainer">
             <p>{this.props.path}</p>
           </div>
-          <FilesContainer files={["1", "2", "34"]} />
+          <FilesContainer files={this.props.folders} />
         </div>
       </Fragment>
     );
@@ -28,12 +38,12 @@ export class App extends Component {
 }
 
 const mapStateToProps = state => ({
-    folders: state.folderData.folders,
-    path: state.folderData.path
-  })
+  folders: state.folderData.folders,
+  path: state.folderData.path
+})
 
 const mapDispatchToProps = dispatch => {
-  return { folderActions: bindActionCreators((folderActions, dispatch)) }
+  return { folderActions: bindActionCreators(folderActions, dispatch) }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
