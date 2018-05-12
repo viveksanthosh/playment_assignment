@@ -1,9 +1,12 @@
 import React, { Component, Fragment } from 'react';
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import SideBar from './atoms/Sidebar';
+import * as folderActions from './actions/FolderActions'
 import FilesContainer from './atoms/FilesContainer';
 import './App.css';
 
-class App extends Component {
+export class App extends Component {
   render() {
     return (
       <Fragment>
@@ -17,11 +20,20 @@ class App extends Component {
           <div className="pathContainer">
             <p>../../../fmnkm.//ef</p>
           </div>
-          <FilesContainer files={["1","2","34"]} />
+          <FilesContainer files={["1", "2", "34"]} />
         </div>
       </Fragment>
     );
   }
 }
 
-export default App;
+const mapStateToProps = state => ({
+    folders: state.folderData.folders,
+    path: state.folderData.path
+  })
+
+const mapDispatchToProps = dispatch => {
+  return { folderActions: bindActionCreators((folderActions, dispatch)) }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

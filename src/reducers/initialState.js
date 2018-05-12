@@ -1,3 +1,6 @@
 export default {
-    folders: []
+    folderData: {
+        path: "",
+        folders: []
+    }
 }
