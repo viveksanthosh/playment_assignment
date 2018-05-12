@@ -19,6 +19,7 @@ class HttpCall {
     }
 
     getFolders(pathToGet) {
+        console.log(pathToGet)
         return new Promise((resolve, reject) => {
             try {
                 let path = pathToGet.split('/').filter(p => (p !== '' && p !== '.'));

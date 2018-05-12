@@ -18,19 +18,32 @@ export class App extends Component {
   addFolder() {
     let name = prompt("Folder Name");
     if (name) {
-      this.props.folderActions.addFolder(name, this.props.path);
+      let sure = true;
+      if (this.props.folders.indexOf(name) !== -1) {
+        sure = window.confirm(`Override folder ${name}`)
+      }
+      if (sure) {
+        this.props.folderActions.addFolder(name, this.props.path);
+      }
     }
   }
 
   onFolderClick(name) {
-    let newPath = `${this.props.path}/${name}`;
-    newPath.replace('//', '/');
-    this.props.folderActions.updateFolders(`${this.props.path}${name}`);
+    debugger;
+    let newPath = `${this.props.path}/${name}/`;
+    newPath = newPath.split('//').join('/');
+    this.props.folderActions.updateFolders(newPath);
   }
 
   goUpFolder() {
     if (this.props.path === './') {
       this.props.generalActions.error('Already at the topmost folder')
+    } else {
+      let { path } = this.props;
+      path = path.split('/').filter(p => p !== '');
+      path.pop();
+
+      this.props.folderActions.updateFolders(path.join('/'));
     }
   }
 
