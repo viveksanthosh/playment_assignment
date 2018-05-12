@@ -3,13 +3,14 @@ class HttpCall {
     constructor() {
         this.folderTree = {}
     }
-    addNewFolder(name, path) {
+    addNewFolder(name, pathToAdd) {
         return new Promise((resolve, reject) => {
             try {
-                path = path.split('/').filter(p => (p !== '' && p !== '.'));
+                let path = pathToAdd.split('/').filter(p => (p !== '' && p !== '.'));
                 let subTree = path.length === 0 ? this.folderTree : path.reduce((result, node) => result[node], this.folderTree);
                 subTree[name] = {};
-                resolve();
+                console.log("pathToAdd", pathToAdd)
+                resolve({ path: pathToAdd });
             } catch (e) {
                 console.warn('error, path does not exist')
                 reject();
@@ -17,12 +18,15 @@ class HttpCall {
         })
     }
 
-    getFolders(path){
+    getFolders(pathToGet) {
         return new Promise((resolve, reject) => {
             try {
-                path = path.split('/').filter(p => (p !== '' && p !== '.'));
+                let path = pathToGet.split('/').filter(p => (p !== '' && p !== '.'));
                 let subTree = path.length === 0 ? this.folderTree : path.reduce((result, node) => result[node], this.folderTree);
-                resolve(Object.keys(subTree));
+                resolve({
+                    path: pathToGet,
+                    folders: Object.keys(subTree)
+                });
             } catch (e) {
                 console.warn('error, path does not exist')
                 reject();
@@ -32,5 +36,7 @@ class HttpCall {
 
 }
 
-let call = new HttpCall();
+let httpcall = new HttpCall();
+
+export default httpcall;
 
