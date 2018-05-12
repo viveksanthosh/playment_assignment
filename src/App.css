@@ -1,17 +1,40 @@
-.container{
+.main {
+  margin-left: 20vw
+}
+
+.controlButtons{
+  display: inline-flex;
+  padding: 2vw;
+}
+
+.controlButtons * {
+  padding: 0 1vw 0 1vw;
+  width: 65px;
+}
+
+.controlButtons button {
+  margin-left: 1vw
+}
+
+.pathContainer p{
+  color: dimgrey;
+  padding-left: 3vw;
+}
+
+
+.container {
   display: flex;
   width: 100vw;
   flex-direction: column;
   flex-wrap: nowrap;
-  margin-left: 20%
 }
 
-.element{
-  width: 70%;
-  font-size: 25px;
+.element {
+  width: 70vw;
+  font-size: 125%;
   color: #000033;
   text-align: center;
-  line-height: 50px;
+  line-height: 250%;
 }
 
 .element:nth-child(odd) {
