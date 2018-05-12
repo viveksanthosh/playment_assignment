@@ -32,6 +32,7 @@ export class App extends Component {
   onFolderClick(name) {
     let newPath = `${this.props.path}/${name}/`;
     newPath = newPath.split('//').join('/');
+   
     this.props.folderActions.updateFolders(newPath);
   }
 
@@ -42,7 +43,7 @@ export class App extends Component {
       let { path } = this.props;
       path = path.split('/').filter(p => (p !== '' && p !== '.'));
       path.pop();
-      path = path.length === 0 ? './' : path.join('/');
+      path = './' + path.join('/');
       this.props.folderActions.updateFolders(path);
     }
   }

@@ -8,8 +8,8 @@ const FilesContainer = ({ addFolder, goUpFolder }) =>
     (
         <div className="controlButtons">
         <p><b>Files</b></p>
-        <button onClick={addFolder} className="btn btn-primary">Add</button>
-        <button onClick={goUpFolder} className="btn btn-primary">Up</button>
+        <button id="add" onClick={addFolder} className="btn btn-primary">Add</button>
+        <button id="up" onClick={goUpFolder} className="btn btn-primary">Up</button>
       </div>
     );
 
