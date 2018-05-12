@@ -1,0 +1,18 @@
+.container {
+    display: flex;
+    width: 100vw;
+    flex-direction: column;
+    flex-wrap: nowrap;
+  }
+  
+  .element {
+    width: 70vw;
+    font-size: 125%;
+    color: #000033;
+    text-align: center;
+    line-height: 250%;
+  }
+  
+  .element:nth-child(odd) {
+    background-color: #f1f1f1;
+  }
