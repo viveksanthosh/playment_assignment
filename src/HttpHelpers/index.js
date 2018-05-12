@@ -9,7 +9,6 @@ class HttpCall {
                 let path = pathToAdd.split('/').filter(p => (p !== '' && p !== '.'));
                 let subTree = path.length === 0 ? this.folderTree : path.reduce((result, node) => result[node], this.folderTree);
                 subTree[name] = {};
-                console.log("pathToAdd", pathToAdd)
                 resolve({ path: pathToAdd });
             } catch (e) {
                 console.warn('error, path does not exist')
@@ -19,7 +18,6 @@ class HttpCall {
     }
 
     getFolders(pathToGet) {
-        console.log(pathToGet)
         return new Promise((resolve, reject) => {
             try {
                 let path = pathToGet.split('/').filter(p => (p !== '' && p !== '.'));

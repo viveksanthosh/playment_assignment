@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import SideBar from './atoms/Sidebar';
 import ControlButtons from './atoms/ControlButtons';
+import ShowPath from './atoms/ShowPath';
 import * as folderActions from './actions/FolderActions'
 import * as generalActions from './actions/GeneralActions'
 import FilesContainer from './atoms/FilesContainer';
@@ -54,9 +55,7 @@ export class App extends Component {
         <SideBar />
         <div className="main">
           <ControlButtons addFolder={this.addFolder} goUpFolder={this.goUpFolder} />
-          <div className="pathContainer">
-            <p>Path: {this.props.path}</p>
-          </div>
+        <ShowPath path={this.props.path} />
           <hr />
           <FilesContainer onFolderClick={this.onFolderClick} files={this.props.folders} />
         </div>

@@ -18,7 +18,7 @@ const FilesContainer = ({ files, onFolderClick }) =>
 
 FilesContainer.propTypes = {
     files: PropTypes.arrayOf(PropTypes.string).isRequired,
-    onFolderClick: PropTypes.func
+    onFolderClick: PropTypes.func.isRequired
 }
 
 export default FilesContainer;

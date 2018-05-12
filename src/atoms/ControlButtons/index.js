@@ -14,8 +14,8 @@ const FilesContainer = ({ addFolder, goUpFolder }) =>
     );
 
 FilesContainer.propTypes = {
-    addFolder: PropTypes.func,
-    goUpFolder: PropTypes.func,
+    addFolder: PropTypes.func.isRequired,
+    goUpFolder: PropTypes.func.isRequired
 }
 
 export default FilesContainer;
