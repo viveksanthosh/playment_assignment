@@ -17,6 +17,7 @@
 }
 
 .pathContainer p{
+  font-family: monospace;
   color: dimgrey;
   padding-left: 3vw;
 }

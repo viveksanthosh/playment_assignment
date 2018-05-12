@@ -8,7 +8,7 @@ const FilesContainer = ({ files }) =>
     (
         <div className="container">
             {files.map(file => (
-                <div className="element" ><p>{file}</p></div>
+                <div key={file} className="element" ><p>{file}</p></div>
             ))}
         </div>
     );
