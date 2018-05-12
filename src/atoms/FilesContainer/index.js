@@ -7,9 +7,12 @@ import './FilesContainer.css';
 const FilesContainer = ({ files, onFolderClick }) =>
     (
         <div className="container">
-            {files.map(file => (
-                <div key={file} onClick={() => onFolderClick(file)} className="element" ><p>{file}</p></div>
-            ))}
+            {files.length === 0 ?
+                <div className="element" ><p>Folder is Empty</p></div>
+                :
+                files.map(file => (
+                    <div key={file} onClick={() => onFolderClick(file)} className="element" ><p>{file}</p></div>
+                ))}
         </div>
     );
 
