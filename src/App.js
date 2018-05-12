@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import SideBar from './atoms/Sidebar';
+import ControlButtons from './atoms/ControlButtons';
 import * as folderActions from './actions/FolderActions'
 import * as generalActions from './actions/GeneralActions'
 import FilesContainer from './atoms/FilesContainer';
@@ -29,7 +30,6 @@ export class App extends Component {
   }
 
   onFolderClick(name) {
-    debugger;
     let newPath = `${this.props.path}/${name}/`;
     newPath = newPath.split('//').join('/');
     this.props.folderActions.updateFolders(newPath);
@@ -40,10 +40,10 @@ export class App extends Component {
       this.props.generalActions.error('Already at the topmost folder')
     } else {
       let { path } = this.props;
-      path = path.split('/').filter(p => p !== '');
+      path = path.split('/').filter(p => (p !== '' && p !== '.'));
       path.pop();
-
-      this.props.folderActions.updateFolders(path.join('/'));
+      path = path.length === 0 ? './' : path.join('/');
+      this.props.folderActions.updateFolders(path);
     }
   }
 
@@ -52,14 +52,11 @@ export class App extends Component {
       <Fragment>
         <SideBar />
         <div className="main">
-          <div className="controlButtons">
-            <p><b>Files</b></p>
-            <button onClick={this.addFolder} className="btn btn-primary">Add</button>
-            <button onClick={this.goUpFolder} className="btn btn-primary">Up</button>
-          </div>
+          <ControlButtons addFolder={this.addFolder} goUpFolder={this.goUpFolder} />
           <div className="pathContainer">
-            <p>{this.props.path}</p>
+            <p>Path: {this.props.path}</p>
           </div>
+          <hr />
           <FilesContainer onFolderClick={this.onFolderClick} files={this.props.folders} />
         </div>
       </Fragment>
